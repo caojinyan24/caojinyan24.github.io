@@ -207,7 +207,18 @@ TestMain 可以用来做单测的初始化和清理工作,[点击查看详细参
 
 针对TestMain的特性,可以做数据库的连接初始化,配置文件读取等.
 
+# 生成测试覆盖率分析文件
 
+ginkgo 提供了覆盖率相关的选项,包括
+`-cover` 指定ginkgo在当前文件夹下生成测试覆盖率分析文件,文件命名规则是`PACKAGE.coverprofile`
+`-coverpkg=<PKG1>,<PKG2>` 默认情况下,golang只统计当前文件夹下test在当前文件夹下的代码行数执行比例,如果希望在统计的时候,包含其他包的代码执行情况,需要通过`-coverpkg`来指定要统计的包.
+`-coverprofile=<FILENAME>` 指定覆盖率分析文件的文件名
+`-outputdir=<DIRECTORY>` 指定覆盖率分析文件的生成地址
+示例:
+`ginkgo -r -cover -coverpkg=a/b/c/handlers,a/b/c/service/...,a/b/c/rpc,a/b/c/db/... -coverprofile=coverage.output -outputdir=./`
+
+最后查看生成的覆盖率文件
+`go tool cover -html=coverage.output -o coverage.html`
 
 # 参考
 
