@@ -198,6 +198,9 @@ var _ = Describe("Handler", func() {
 - ginkgo 可以自定义单测的报告信息
 - 希望只执行一个 case:`ginkgo --focus '$DescribeName'`
 - 希望排除某个 case:`ginkgo --ignore '$DescribeName'`
+- 希望忽略某个包下的case:`ginkgo -r --skipPackage=util,test/service` (其中的`util`和`test/service`是项目中的文件夹名称)
+
+需要说明的是,对于`--skipPackage`标签,指定的并不是golang的包名,而是文件夹名称,在执行时,会进行文件夹名称的匹配,所有匹配上的文件夹下的测试case,都不会被执行.
 
 # 执行初始化
 
@@ -220,8 +223,8 @@ ginkgo 提供了覆盖率相关的选项,包括
 最后查看生成的覆盖率文件
 `go tool cover -html=coverage.output -o coverage.html`
 
-# 参考
-
+# **参考**
+****
 [gomock](https://github.com/golang/mock)
 [ginkgo](https://onsi.github.io/ginkgo/)
 [golang-testing](https://books.studygolang.com/The-Golang-Standard-Library-by-Example/chapter09/09.0.html)
